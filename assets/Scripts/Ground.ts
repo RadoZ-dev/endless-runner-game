@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, Vec3, UITransform, director, Canvas } from 'cc';
+import { GameControl } from './GameControl';
 const { ccclass, property } = _decorator;
 
 @ccclass('Ground')
@@ -21,6 +22,12 @@ export class Ground extends Component {
     })
     public ground3: Node;
 
+    @property({
+        type: GameControl,
+        tooltip: 'Reference to GameControl'
+    })
+    public gameControl: GameControl;
+
     public groundWidth1: number;
     public groundWidth2: number;    
     public groundWidth3: number;
@@ -29,7 +36,8 @@ export class Ground extends Component {
     public startPosition2 = new Vec3(); 
     public startPosition3 = new Vec3();
 
-    public gameSpeed: number = 50;
+    public gameControlSpeed = new GameControl;
+    public gameSpeed = this.gameControlSpeed.speed;
 
     onLoad() {
         this.startUp();
@@ -50,6 +58,8 @@ export class Ground extends Component {
     }
 
     update(deltaTime: number) {
+        this.gameSpeed = this.gameControlSpeed.speed;
+
         this.startPosition1 = this.ground1.position;
         this.startPosition2 = this.ground2.position;    
         this.startPosition3 = this.ground3.position;

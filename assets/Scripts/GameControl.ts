@@ -14,7 +14,7 @@ export class GameControl extends Component {
         type: CCInteger,
         tooltip: 'Game Speed',      
     })
-    public speed: number = 100;
+    public speed: number = 200;
 
     @property({
         type: CCInteger,    

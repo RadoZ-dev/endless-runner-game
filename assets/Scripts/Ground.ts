@@ -37,7 +37,7 @@ export class Ground extends Component {
     public startPosition3 = new Vec3();
 
     public gameControlSpeed = new GameControl;
-    public gameSpeed = this.gameControlSpeed.speed;
+    public gameSpeed: number = 50;
 
     onLoad() {
         this.startUp();
@@ -58,8 +58,6 @@ export class Ground extends Component {
     }
 
     update(deltaTime: number) {
-        this.gameSpeed = this.gameControlSpeed.speed;
-
         this.startPosition1 = this.ground1.position;
         this.startPosition2 = this.ground2.position;    
         this.startPosition3 = this.ground3.position;

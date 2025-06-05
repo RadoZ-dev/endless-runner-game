@@ -2,6 +2,8 @@ import { _decorator, CCInteger, Component, Node, input, Input, EventKeyboard, Ke
 import { Ground } from "./Ground";
 import { Results } from "./Results";
 import { Bird } from "./Bird";
+import { Pipes } from "./Pipes";
+
 const { ccclass, property } = _decorator;
 
 @ccclass('GameControl')
@@ -33,7 +35,7 @@ export class GameControl extends Component {
         type: CCInteger,    
         tooltip: 'Pipe Speed'
     })
-    public pipeSpeed: number = 200;
+    public pipeSpeed: number = 50;
 
     onLoad() {
         this.initListener();
@@ -45,7 +47,6 @@ export class GameControl extends Component {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
         this.node.on(Node.EventType.TOUCH_START, () => {
             this.bird.fly();
-            this.startGame();
         });
     }
 
@@ -73,12 +74,21 @@ export class GameControl extends Component {
 
     gameOver() {
         this.results.displayResults();
+        this.bird.resetBird();
         director.pause();
     }
 
     resetGame() {
-        this.results.resetScore();  
+        this.results.resetScore()
         this.startGame();
+    }
+
+    passPipe() {
+        this.results.increaseScore();
+    }
+
+    update(dt: number): void {
+        this.results.updateScore(this.results.currentScore + 1);
     }
 }
 

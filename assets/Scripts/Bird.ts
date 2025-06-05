@@ -24,23 +24,27 @@ export class Bird extends Component {
         this.birdFlyingAnimation = this.getComponent(Animation);
     }
 
+    protected start(): void {
+        this.birdFlyingAnimation.play();
+    }
+
     resetBird() {
         this.birdLocation = new Vec3(0, 56, 0);
         this.node.setPosition(this.birdLocation);
     }
 
     fly() {
-        this.birdFlyingAnimation.stop();
-
         tween(this.node.position)
             .to(this.jumpDuration, new Vec3(this.node.position.x, this.node.position.y + this.jumpHeight, 0), { easing: "smooth",
                 onUpdate: (target: Vec3, ration: number) => {
                     this.node.position = target;
                 }
              })
-            .start();
+            .start();  
+    }
 
-        this.birdFlyingAnimation.play();    
+    protected update(dt: number): void {
+        
     }
 }
 

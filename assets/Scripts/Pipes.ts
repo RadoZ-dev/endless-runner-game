@@ -1,0 +1,72 @@
+import { _decorator, Component, Node, Vec3, screen, find, UITransform } from 'cc';
+
+const { ccclass, property } = _decorator;
+const random = (min, max) => {
+    return Math.random() * (max - min) + min;
+}
+
+@ccclass('Pipes')
+export class Pipes extends Component {
+    @property({
+        type: Node,
+        tooltip: 'Top Pipe'
+    })
+    public topPipe: Node;
+
+    @property({
+        type: Node,
+        tooltip: 'Bottom Pipe'
+    })
+    public bottomPipe: Node;
+
+    public temporaryStartpositionTop: Vec3 = new Vec3(0, 0, 0);
+    public temporaryStartpositionBottom: Vec3 = new Vec3(0, 0, 0);
+    public scene = screen.windowSize;
+
+    public game;
+    public pipeSpeed: number;
+    public tempSpeed: number;
+
+    isPass: boolean;
+
+    onLoad() {
+        this.game = find("GameControl").getComponent("GameControl");
+        this.pipeSpeed = this.game.pipeSpeed;
+    }
+
+    initialPosition() {
+        this.temporaryStartpositionTop.x = (this.topPipe.getComponent(UITransform).width + this.scene.width);
+        this.temporaryStartpositionBottom.x = (this.bottomPipe.getComponent(UITransform).width + this.scene.width);
+    
+        let gap = random(90, 100);
+        let topHeight = random(0, 450);
+    
+        this.temporaryStartpositionTop.y = topHeight;
+        this.temporaryStartpositionBottom.y = (topHeight - gap * 10);
+
+        this.topPipe.setPosition(this.temporaryStartpositionTop);
+        this.bottomPipe.setPosition(this.temporaryStartpositionBottom);
+    }
+
+    update(dt: number) {
+        this.tempSpeed = this.pipeSpeed * dt;
+
+        // this.temporaryStartpositionTop = this.temporaryStartpositionTop;
+        // this.temporaryStartpositionBottom = this.temporaryStartpositionBottom;
+
+        this.temporaryStartpositionTop.x -= this.tempSpeed;
+        this.temporaryStartpositionBottom.x -= this.tempSpeed;
+
+        this.topPipe.setPosition(this.temporaryStartpositionTop);
+        this.bottomPipe.setPosition(this.temporaryStartpositionBottom);
+
+        if(this.isPass == false && this.topPipe.position.x <= 0) {
+            this.isPass = true;
+            this.game.passPipe();
+
+            this.destroy();
+        }
+    }
+}
+
+

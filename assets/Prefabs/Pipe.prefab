@@ -201,7 +201,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Bottom Pipe",
+    "_name": "BottomPipe",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -235,7 +235,7 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 2,
+      "x": -2,
       "y": 2,
       "z": 1
     },
@@ -268,7 +268,7 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": 1,
       "y": 0
     },
     "_id": ""

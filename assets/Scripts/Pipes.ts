@@ -33,11 +33,12 @@ export class Pipes extends Component {
         this.game = find("GameControl").getComponent("GameControl");
         this.pipeSpeed = this.game.pipeSpeed;
         this.initialPosition();
+        this.isPass = false;
     }
 
     initialPosition() {
-        this.temporaryStartpositionTop.x = (this.topPipe.getComponent(UITransform).width + this.scene.width);
-        this.temporaryStartpositionBottom.x = (this.bottomPipe.getComponent(UITransform).width + this.scene.width);
+        this.temporaryStartpositionTop.x = (this.topPipe.getComponent(UITransform).width + this.scene.width + 100);
+        this.temporaryStartpositionBottom.x = (this.bottomPipe.getComponent(UITransform).width + this.scene.width + 100);
     
         let gap = random(90, 100);
         let topHeight = random(400, 800);

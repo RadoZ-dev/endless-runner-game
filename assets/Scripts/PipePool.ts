@@ -14,10 +14,10 @@ export class PipePool extends Component {
     public pipesContainer;
 
     public pool = new NodePool;
-    public pipe;
+    public pipe: Node = null;
 
     initPool() {
-        let pipesCount = 3;
+        let pipesCount = 2;
 
         for (let i = 0; i < pipesCount; i++) {
             this.pipe = instantiate(this.prefabPipes);

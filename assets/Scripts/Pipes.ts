@@ -40,7 +40,7 @@ export class Pipes extends Component {
         this.temporaryStartpositionBottom.x = (this.bottomPipe.getComponent(UITransform).width + this.scene.width);
     
         let gap = random(90, 100);
-        let topHeight = 400;
+        let topHeight = random(400, 800);
     
         this.temporaryStartpositionTop.y = topHeight;
         this.temporaryStartpositionBottom.y = (topHeight - gap * 10);

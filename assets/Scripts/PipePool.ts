@@ -17,7 +17,7 @@ export class PipePool extends Component {
     public pipe: Node = null;
 
     initPool() {
-        let pipesCount = 2;
+        let pipesCount = 3;
 
         for (let i = 0; i < pipesCount; i++) {
             this.pipe = instantiate(this.prefabPipes);

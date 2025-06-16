@@ -23,7 +23,7 @@ export class Results extends Component {
 
     updateScore(currentScore: number) {
         this.currentScore = currentScore;
-        this.score.string = (`${this.currentScore}`);
+        this.score.string = (`${Math.trunc(this.currentScore)}`);
     }
 
     resetScore() {
@@ -32,12 +32,12 @@ export class Results extends Component {
     }
 
     increaseScore() {
-        this.updateScore(this.currentScore + 1);
+        this.updateScore(this.currentScore + 0.01);
     }
 
     displayResults() {
         this.maxScore = Math.max(this.currentScore, this.maxScore);
-        this.highScore.string = (`High Score: ${this.maxScore}`);
+        this.highScore.string = (`High Score: ${Math.trunc(this.maxScore)}`);
         this.resultFinal.node.active = true;
         this.highScore.node.active = true;
     }

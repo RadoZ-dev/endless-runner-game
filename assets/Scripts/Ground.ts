@@ -37,7 +37,7 @@ export class Ground extends Component {
     public startPosition3 = new Vec3();
 
     public gameControlSpeed = new GameControl;
-    public gameSpeed: number = 50;
+    public gameSpeed: number = 200;
 
     onLoad() {
         this.startUp();

@@ -3,6 +3,7 @@ import { Ground } from "./Ground";
 import { Results } from "./Results";
 import { Bird } from "./Bird";
 import { PipePool } from "./PipePool";
+import { BirdAudio } from "./BirdAudio";
 
 const { ccclass, property } = _decorator;
 
@@ -42,6 +43,11 @@ export class GameControl extends Component {
     })
     public pipeSpeed: number = 50;
 
+    @property({
+        type: BirdAudio,
+    })
+    public birdAudio: BirdAudio;  
+
     public isOver: boolean;
 
     onLoad() {
@@ -61,6 +67,7 @@ export class GameControl extends Component {
 
             if (this.isOver === false) {
                 this.bird.fly();
+                this.birdAudio.onAudioQueue(0);
             }
         });
     }
@@ -73,6 +80,7 @@ export class GameControl extends Component {
     gameOver() {
         this.results.displayResults();
         this.bird.resetBird();
+        this.birdAudio.onAudioQueue(3);
         director.pause();
         this.isOver = true;
     }
@@ -86,6 +94,7 @@ export class GameControl extends Component {
 
     passPipe() {
         this.results.updateScore(this.results.currentScore + 10);
+        this.birdAudio.onAudioQueue(1);
     }
 
     createPipe() {
@@ -102,6 +111,7 @@ export class GameControl extends Component {
     
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact) {
         this.bird.hitSomehing = true;
+        this.birdAudio.onAudioQueue(2);
     }
 
     birdStruck() {
